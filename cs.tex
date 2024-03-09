@@ -173,18 +173,31 @@ a part of memory. P2P communication between directory controllers.
 
 \section{Pipelining}
 
+\subsection{Branch prediction
+
+Static branch prediction looks at previous run results (usually bimodally distributed) and 
+always takes the more probable case. Dynamic ones use a bit (or more) to track if the current 
+pc has been taken recently and follow that pattern (ls bits of pc are indexed into buffer 
+tracking this).
+
 \subsection{Hazards}
 
-Hazards are things that can mess up Pipelining
+Hazards are things that can mess up pipelining
+Some reads can be hazardous due to DMA.
 
-RAW
+\begin{itemize}
+    \item RAW - Read after write. Most common. 
+    \item WAR - Write after read. Only a problem in OOO
+    \item WAW - Write after write. Only a problem in OOO
+    \item Branching - More expensive than data. These are hazards that may or may not change PC based on input. 
+\end{itemize}
 
-WAR
+Methods to combat Hazards
 
-WAW
-
-RAR 
-
-Remember DMA stuff can cause memory issues!!
+\begin{itemize}
+    \item Forwarding - Forward result from execute/memory and memory/writeback and feed back to ALU for inputs
+    \item Stalling - Slow 
+    \item 
+\end{itemize}
 
 \end{document}
